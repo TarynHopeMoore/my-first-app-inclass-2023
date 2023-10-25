@@ -29,3 +29,13 @@ Install packages:
 ```sh
 pip install -r requirements.txt
 ```
+
+Obtain an [API Key from Alphavantage](https://www.alphavantage.co/support/#api-key) or from the prof (`ALPHAVANTAGE_API_KEY`).
+
+Create a ".env" file and paste in the following contents:
+
+```sh
+# this is the ".env" file...
+
+ALPHAVANTAGE_API_KEY="_________"
+```
