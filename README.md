@@ -50,3 +50,8 @@ Send an email:
 ```sh
 python app/email_service.py
 ```
+
+Run unemployment report that imports another function:
+```sh
+python -m app.unemployment
+```
