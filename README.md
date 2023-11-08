@@ -55,17 +55,3 @@ Run unemployment report that imports another function:
 ```sh
 python -m app.unemployment
 ```
-
-Run  mod:
-```sh
-python app/my_mod.py
-```
-
-
-## Testing
-
-Run tests:
-
-```sh
-pytest
-```
