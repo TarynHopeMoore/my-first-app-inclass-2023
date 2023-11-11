@@ -37,6 +37,10 @@ data = parsed_response["data"]
 
 print("-------------------------")
 print("LATEST UNEMPLOYMENT RATE:")
+
+latest_rate = data[0]['value']
+latest_date = data[0]["date"]
+
 #print(data[0])
 
 latest_rate = data[0]['value']
@@ -71,7 +75,6 @@ fig = line(x=dates, y=rates, title="United States Unemployment Rate over time", 
 fig.show()
 
 user_address = input("Please enter your email address: ")
-
 
 content = f"""
 <h1> Unemployment Report Email </h1>
