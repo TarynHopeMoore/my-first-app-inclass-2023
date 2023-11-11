@@ -38,9 +38,6 @@ data = parsed_response["data"]
 print("-------------------------")
 print("LATEST UNEMPLOYMENT RATE:")
 
-latest_rate = data[0]['value']
-latest_date = data[0]["date"]
-
 #print(data[0])
 
 latest_rate = data[0]['value']
