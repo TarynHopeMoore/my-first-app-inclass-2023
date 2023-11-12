@@ -13,70 +13,77 @@ print("BACK IN UNEMPLOYMENT FILE")
 load_dotenv() #go look in .env file for environment variables
 
 API_KEY = os.getenv("ALPHAVANTAGE_API_KEY")
-print(API_KEY)
 
 #breakpoint()
 #quit()
 
+#FUNCTIONS
 
-request_url = f"https://www.alphavantage.co/query?function=UNEMPLOYMENT&apikey={API_KEY}"
+def fetch_data():
+    request_url = f"https://www.alphavantage.co/query?function=UNEMPLOYMENT&apikey={API_KEY}"
+    
+    response = requests.get(request_url)
 
-response = requests.get(request_url)
+    parsed_response = json.loads(response.text)
+    print(type(parsed_response))
+    print(parsed_response.keys())
+    #pprint(parsed_response)
 
-parsed_response = json.loads(response.text)
-print(type(parsed_response))
-print(parsed_response.keys())
-#pprint(parsed_response)
-
-data = parsed_response["data"]
-
-# Challenge A
-#
-# What is the most recent unemployment rate? And the corresponding date?
-# Display the unemployment rate using a percent sign.
-
-print("-------------------------")
-print("LATEST UNEMPLOYMENT RATE:")
-
-#print(data[0])
-
-latest_rate = data[0]['value']
-latest_date = data[0]["date"]
-
-print(f"{latest_rate}%", "as of", latest_date)
+    data = parsed_response["data"]
+    return data
 
 
-# Challenge B
-#
-# What is the average unemployment rate for all months during this calendar year?
-# ... How many months does this cover?
+if __name__ == "__main__":
+    
+    data = fetch_data()
+
+    # Challenge A
+    #
+    # What is the most recent unemployment rate? And the corresponding date?
+    # Display the unemployment rate using a percent sign.
+
+    print("-------------------------")
+    print("LATEST UNEMPLOYMENT RATE:")
+
+    #print(data[0])
+
+    latest_rate = data[0]['value']
+    latest_date = data[0]["date"]
+
+    print(f"{latest_rate}%", "as of", latest_date)
 
 
-this_year = [d for d in data if "2023-" in d["date"]]
+    # Challenge B
+    #
+    # What is the average unemployment rate for all months during this calendar year?
+    # ... How many months does this cover?
 
-rates_this_year = [float(d["value"]) for d in this_year]
-#print(rates_this_year)
 
-print("-------------------------")
-print("AVG UNEMPLOYMENT THIS YEAR:", f"{round(mean(rates_this_year), 2)}%")
-print("NO MONTHS:", len(this_year))
+    this_year = [d for d in data if "2023-" in d["date"]]
 
-# Challenge C
-#
-# Plot a line chart of unemployment rates over time.
+    rates_this_year = [float(d["value"]) for d in this_year]
+    #print(rates_this_year)
 
-dates = [d["date"] for d in data]
-rates = [float(d["value"]) for d in data]
+    print("-------------------------")
+    print("AVG UNEMPLOYMENT THIS YEAR:", f"{round(mean(rates_this_year), 2)}%")
+    print("NO MONTHS:", len(this_year))
 
-fig = line(x=dates, y=rates, title="United States Unemployment Rate over time", labels= {"x": "Month", "y": "Unemployment Rate"})
-fig.show()
+    # Challenge C
+    #
+    # Plot a line chart of unemployment rates over time.
 
-user_address = input("Please enter your email address: ")
+    dates = [d["date"] for d in data]
+    rates = [float(d["value"]) for d in data]
 
-content = f"""
-<h1> Unemployment Report Email </h1>
+    fig = line(x=dates, y=rates, title="United States Unemployment Rate over time", labels= {"x": "Month", "y": "Unemployment Rate"})
+    fig.show()
 
-<p> Latest rate: {latest_rate}% as of {latest_date} </p>
-"""
+    user_address = input("Please enter your email address: ")
 
-send_email(recipient_address=user_address, html_content=content, subject="Your Unemployment Report")
+    content = f"""
+    <h1> Unemployment Report Email </h1>
+
+    <p> Latest rate: {latest_rate}% as of {latest_date} </p>
+    """
+
+    send_email(recipient_address=user_address, html_content=content, subject="Your Unemployment Report")
