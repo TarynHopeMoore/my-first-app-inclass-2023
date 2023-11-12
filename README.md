@@ -43,17 +43,13 @@ python app/my_script.py
 Run the unemployment report:
 
 ```sh
-python app/unemployment.py
+#python app/unemployment.py
+python -m app.unemployment
 ```
 
 Send an email: 
 ```sh
 python app/email_service.py
-```
-
-Run unemployment report that imports another function:
-```sh
-python -m app.unemployment
 ```
 
 Run  mod:
