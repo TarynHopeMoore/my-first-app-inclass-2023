@@ -18,6 +18,7 @@ def location_information():
 
     print("LOCATION INFO:")
     print(geo)
+    return str(type(geo))
 
 def display_forecast(zip_code, country_code="US"):
     """

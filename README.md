@@ -59,7 +59,7 @@ python app/my_mod.py
 
 Run  weather:
 ```sh
-python app/weather.py
+python -m app.weather
 ```
 
 
