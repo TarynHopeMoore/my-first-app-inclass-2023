@@ -5,22 +5,21 @@ import json
 
 from pgeocode import Nominatim
 from IPython.display import Image, display
-from IPython.core.display import HTML
 
-zip_code = "20057"
+
+ZIP_CODE = "20057"
+COUNTRY_CODE = "US"
 DEGREE_SIGN = u"\N{DEGREE SIGN}"
 
 #FUNCTIONS
 
-def location_information():
-    nomi = Nominatim('US')
+def location_information(zip_code = ZIP_CODE, country_code = COUNTRY_CODE):
+    nomi = Nominatim(country_code)
     geo = nomi.query_postal_code(zip_code)
 
-    print("LOCATION INFO:")
-    print(geo)
-    return str(type(geo))
+    return geo
 
-def display_forecast(zip_code, country_code="US"):
+def display_forecast(zip_code = ZIP_CODE, country_code= COUNTRY_CODE):
     """
     Displays a seven day weather forecast for the provided zip code.
 
@@ -32,8 +31,7 @@ def display_forecast(zip_code, country_code="US"):
 
     """
 
-    nomi = Nominatim(country_code)
-    geo = nomi.query_postal_code(zip_code)
+    geo = location_information(zip_code, country_code)
     latitude = geo["latitude"]
     longitude = geo["longitude"]
 
@@ -62,5 +60,8 @@ if __name__ == "__main__":
     zip_code = input("Please input a zip code (e.g. '06510'): ") or "06510"
     print("ZIP CODE:", zip_code)
 
-    location_information()
-    display_forecast(zip_code, country_code="US")
+    print("LOCATION INFO:")
+    print(location_information(zip_code))
+
+    print("FORECAST:")
+    display_forecast(zip_code)
