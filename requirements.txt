@@ -19,3 +19,6 @@ pgeocode
 
 #for displaying images
 IPython
+
+#needed for webapp
+flask
