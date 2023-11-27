@@ -61,6 +61,12 @@ Run  weather:
 ```sh
 python -m app.weather
 ```
+Run the stocks report:
+
+```sh
+python -m app.stocks
+```
+
 
 
 ## Testing
