@@ -19,3 +19,9 @@ pgeocode
 
 #for displaying images
 IPython
+
+#needed for webapp
+flask
+
+#server needs this to run the webapp
+gunicorn
