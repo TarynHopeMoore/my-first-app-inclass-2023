@@ -17,15 +17,13 @@ def weather_dashboard():
     print("WEATHER REPORT")
 
     if request.method == "POST":
-        # for data sent via POST request, form inputs are in request.form:
-        request_data = dict(request.form)
-        print("FORM DATA:", request_data)
+        request_data_weather = dict(request.form)
+        print("FORM DATA:", request_data_weather)
     else:
-        # for data sent via GET request, url params are in request.args
-        request_data = dict(request.args)
-        print("URL PARAMS:", request_data)
+        request_data_weather = dict(request.args)
+        print("URL PARAMS:", request_data_weather)
 
-    zip_code = request_data.get("zip_code") or "20057"
+    zip_code = request_data_weather.get("zip_code") or "20057"
 
     try:
         test = display_forecast(zip_code=zip_code)
