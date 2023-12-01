@@ -1,0 +1,33 @@
+{% extends "bootstrap_5_layout.html" %}
+{% set active_page = "weather_dashboard" %}
+
+{% block content %}
+
+    <h2>Weather Dashboard</h2>
+    <p class="lead">Latest Forecast:</p>
+
+    <table class="table table-hover table-responsive caption-top">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Temperature (Fahrenheit)</th>
+                <th scope="col">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+        <!--
+            JINJA FOR LOOP
+            https://jinja.palletsprojects.com/en/3.1.x/templates/
+        -->
+        {% for row in data %}
+            <tr>
+                <td>{{ row["name"] }} {{ row["startTime"][0:10]}}</td>
+                <td>{{ row["temperature"] }}</td>
+                <td>{{ row["shortForecast"] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

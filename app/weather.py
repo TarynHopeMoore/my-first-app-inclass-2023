@@ -19,9 +19,9 @@ def location_information(zip_code = ZIP_CODE, country_code = COUNTRY_CODE):
 
     return geo
 
-def display_forecast(zip_code = ZIP_CODE, country_code= COUNTRY_CODE):
+def get_forecast(zip_code = ZIP_CODE, country_code= COUNTRY_CODE):
     """
-    Displays a seven day weather forecast for the provided zip code.
+    Gets the data for a seven day weather forecast for the provided zip code.
 
     Params :
 
@@ -45,6 +45,12 @@ def display_forecast(zip_code = ZIP_CODE, country_code= COUNTRY_CODE):
 
     periods = parsed_forecast_response["properties"]["periods"]
     daytime_periods = [period for period in periods if period["isDaytime"] == True]
+    return forecast_response, daytime_periods
+
+def display_forecast(zip_code = ZIP_CODE, country_code= COUNTRY_CODE):
+    
+    get = get_forecast(zip_code, country_code)
+    daytime_periods = get[1]
 
     for period in daytime_periods:
         #print(period.keys())
@@ -54,7 +60,7 @@ def display_forecast(zip_code = ZIP_CODE, country_code= COUNTRY_CODE):
         #print(period["detailedForecast"])
         display(Image(url=period["icon"]))
     
-    return forecast_response.status_code
+    return get[0].status_code
 
 if __name__ == "__main__":
     zip_code = input("Please input a zip code (e.g. '06510'): ") or "06510"
